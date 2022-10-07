@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) (2020) (Mathieu Bergeron) (mathieu.bergeron@cmontmorency.qc.ca)
+//
+// This file is part of Ntro
+//
+// This is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with aquiletour.  If not, see <https://www.gnu.org/licenses/> -->
+
+<?import javafx.scene.layout.VBox ?>
+<?import javafx.scene.layout.HBox ?>
+<?import javafx.scene.layout.Pane ?>
+<?import javafx.scene.control.Label ?>
+<?import javafx.scene.control.Button ?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+    fx:controller="ca.ntro.cards.foo.frontend.views.fragments.FooTestCaseFragment" 
+    VBox.vgrow="ALWAYS"
+    id="test-case-fragment">
+
+    <Pane VBox.vgrow="ALWAYS" styleClass="vspace-tiny" />
+
+    <Pane>
+
+        <HBox fx:id="idContainer" styleClass="left">
+            <Label 
+                fx:id="testCaseIdLabel">
+             </Label>
+        </HBox>
+
+        <HBox fx:id="sizeContainer" styleClass="left">
+            <Label 
+                fx:id="inputSizeLabel">
+             </Label>
+         </HBox>
+
+        <HBox fx:id="manualContainer" styleClass="left">
+            <Button 
+                fx:id="manualButton">
+             </Button>
+        </HBox>
+
+        <HBox fx:id="codeContainer" styleClass="left">
+            <Button 
+                fx:id="codeButton">
+             </Button>
+        </HBox>
+
+        <HBox fx:id="solutionContainer" styleClass="left">
+            <Button 
+                fx:id="solutionButton">
+             </Button>
+        </HBox>
+    </Pane>
+
+    <Pane VBox.vgrow="ALWAYS" styleClass="vspace-tiny" />
+
+</VBox>

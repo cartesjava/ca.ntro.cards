@@ -1,0 +1,34 @@
+package ca.ntro.cards.foo.test_cases;
+
+import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
+import ca.ntro.cards.foo.models.FooCardsModel;
+import ca.ntro.cards.foo.models.FooProcedureDashboardModel;
+import ca.ntro.cards.foo.models.values.FooTestCase;
+import ca.ntro.cards.foo.test_cases.execution_trace.FooExecutionTrace;
+import ca.ntro.cards.test_cases.ProcedureTestCaseDatabase;
+import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTrace;
+import ca.ntro.core.initialization.Ntro;
+
+public class   FooTestCaseDatabase<STUDENT_MODEL extends FooCardsModel> 
+
+       extends ProcedureTestCaseDatabase<FooCardsModel, 
+                                         STUDENT_MODEL, 
+                                         FooTestCase, 
+                                         FooExecutionTrace,
+                                         FooProcedureDashboardModel> {
+
+    @Override
+    public void describeTestCasesToGenerate() {
+        
+        AbstractTestCaseDescriptor descriptor = AbstractTestCaseDescriptor.create()
+                                                          .category("exemples")
+                                                          .testCaseId("ex01");
+        
+        addTestCaseDescriptor(descriptor);
+
+
+        // TODO: ajouter d'autres descriptions de cas de tests
+
+    }
+
+}

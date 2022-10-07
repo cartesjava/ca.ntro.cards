@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) (2020) (Mathieu Bergeron) (mathieu.bergeron@cmontmorency.qc.ca)
+//
+// This file is part of Ntro
+//
+// This is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with aquiletour.  If not, see <https://www.gnu.org/licenses/> -->
+
+<?import javafx.scene.layout.VBox ?>
+<?import javafx.scene.layout.HBox ?>
+<?import javafx.scene.layout.Pane ?>
+<?import javafx.scene.control.Label ?>
+<?import javafx.scene.control.Button ?>
+<?import javafx.scene.control.ComboBox ?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.collections.FXCollections ?>
+<?import java.lang.String?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+    fx:controller="ca.ntro.cards.fibonacci.frontend.views.FibonacciSelectionsView" 
+    styleClass="top"
+    VBox.vgrow="ALWAYS" 
+    id="selections-view">
+
+    <Pane VBox.vgrow="ALWAYS" styleClass="vspace-small" />
+
+    <HBox styleClass="bottom">
+
+        <HBox HBox.hgrow="ALWAYS" 
+              fx:id="idContainer"
+              styleClass="bottom-left">
+
+            <Label
+                text="%testCaseId"
+                styleClass="text-big">
+            </Label>
+
+        </HBox>
+
+        <Pane  styleClass="hspace-tiny" />
+
+        <HBox HBox.hgrow="ALWAYS"  
+              fx:id="sizeContainer"
+              styleClass="bottom-left">
+
+            <Label
+                text="%testCaseSize"
+                styleClass="text-big">
+            </Label>
+
+        </HBox>
+
+        <Pane  styleClass="hspace-tiny" />
+
+        <HBox HBox.hgrow="ALWAYS"  
+              fx:id="manualContainer"
+              styleClass="bottom-left">
+
+            <Label
+                text="%testCaseOnScreen"
+                styleClass="text-big">
+            </Label>
+
+        </HBox>
+
+        <Pane  styleClass="hspace-tiny" />
+
+        <HBox HBox.hgrow="ALWAYS"  
+              fx:id="codeContainer"
+              styleClass="bottom-left">
+
+            <Label
+                text="%testCaseInTheCode"
+                styleClass="text-big">
+            </Label>
+
+        </HBox>
+
+        <Pane  styleClass="hspace-tiny" />
+
+        <HBox HBox.hgrow="ALWAYS"  
+              fx:id="solutionContainer"
+              styleClass="bottom-left">
+
+            <Label
+                text="%testCaseSolution"
+                styleClass="text-big">
+            </Label>
+
+        </HBox>
+    </HBox>
+
+    <VBox VBox.vgrow="ALWAYS">
+        <ScrollPane VBox.vgrow="ALWAYS" 
+                    fitToWidth="true" 
+                    styleClass="test-case-container">
+            <VBox
+                VBox.vgrow="ALWAYS"
+                fx:id="testCaseContainer"
+                styleClass="container">
+            </VBox>
+        </ScrollPane>
+    </VBox>
+
+    <!--
+
+    <HBox styleClass="bottom-right">
+
+        <VBox>
+
+            <Label
+                text="%categories"
+                fx:id="categoriesLabel"
+                styleClass="text-big">
+            </Label>
+
+
+            <ComboBox>
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="exemples" />
+                    <String fx:value="aléatoire" />
+            </FXCollections>
+            </items>
+            </ComboBox>
+
+        </VBox>
+    </HBox>
+
+    -->
+
+
+
+
+
+
+</VBox>

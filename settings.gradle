@@ -1,0 +1,89 @@
+rootProject.name = 'ca.ntro.cards'
+
+include 'ntro_core'
+include 'ntro_core_jdk'
+include 'ntro_app'
+include 'ntro_app_jdk'
+include 'ntro_app_fx'
+
+include 'common'
+include 'common_procedure'
+include 'common_efficiency'
+
+include 'foo_procedure'
+include 'foo_efficiency'
+include 'foo_solution'
+project(':foo_solution').projectDir = file('solutions/foo_solution')
+
+include 'intro_procedure'
+include 'intro_efficiency'
+include 'intro_solution'
+project(':intro_solution').projectDir = file('solutions/intro_solution')
+
+include 'freesort_procedure'
+include 'freesort_efficiency'
+include 'freesort_solution'
+project(':freesort_solution').projectDir = file('solutions/freesort_solution')
+
+include 'naivesort_procedure'
+include 'naivesort_efficiency'
+include 'naivesort_solution'
+project(':naivesort_solution').projectDir = file('solutions/naivesort_solution')
+
+include 'arraylist_procedure'
+include 'arraylist_efficiency'
+include 'arraylist_solution'
+project(':arraylist_solution').projectDir = file('solutions/arraylist_solution')
+
+include 'fusionsort_procedure'
+include 'fusionsort_efficiency'
+include 'fusionsort_solution'
+project(':fusionsort_solution').projectDir = file('solutions/fusionsort_solution')
+
+include 'shift_procedure'
+include 'shift_efficiency'
+include 'shift_solution'
+project(':shift_solution').projectDir = file('solutions/shift_solution')
+
+include 'shift2_procedure'
+include 'shift2_efficiency'
+include 'shift2_solution'
+project(':shift2_solution').projectDir = file('solutions/shift2_solution')
+
+include 'fibonacci_procedure'
+include 'fibonacci_efficiency'
+include 'fibonacci_solution'
+project(':fibonacci_solution').projectDir = file('solutions/fibonacci_solution')
+
+include 'validator_common'
+include 'validator_foo'
+include 'validator_foo_solution'
+project(':validator_foo_solution').projectDir = file('solutions/validator_foo_solution')
+
+include 'validator_shift'
+include 'validator_shift_solution'
+project(':validator_shift_solution').projectDir = file('solutions/validator_shift_solution')
+
+include 'validator_shift2'
+include 'validator_shift2_solution'
+project(':validator_shift2_solution').projectDir = file('solutions/validator_shift2_solution')
+
+include 'validator_examen2'
+include 'validator_examen2_solution'
+project(':validator_examen2_solution').projectDir = file('solutions/validator_examen2_solution')
+
+include 'validator_test'
+include 'validator_test_solution'
+project(':validator_test_solution').projectDir = file('solutions/validator_test_solution')
+
+
+buildscript {
+    repositories {
+	    mavenCentral()
+	    maven {url "https://plugins.gradle.org/m2/"}
+    }
+
+    dependencies {
+        classpath 'org.openjfx:javafx-plugin:0.0.10'
+    }
+}

@@ -1,0 +1,20 @@
+plugins {
+    id 'localJavaPlugin'
+    id 'localFxPlugin'
+}
+
+project.group = 'ca.ntro.cards'
+project.version = 'atelier3_1'
+
+
+dependencies {
+    implementation project(':ntro_core')
+    implementation project(':ntro_core_jdk')
+
+    implementation project(':ntro_app')
+    implementation project(':ntro_app_jdk')
+
+    // Vertx web server and SockJS server
+    implementation 'io.vertx:vertx-web:4.0.2'
+
+}
