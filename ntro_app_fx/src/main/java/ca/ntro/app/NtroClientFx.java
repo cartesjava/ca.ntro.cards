@@ -33,11 +33,13 @@ public interface NtroClientFx extends App<FrontendRegistrarFx> {
     void registerArgs(String[] args);
     
     private static void checkJavaVersion() {
+        /*
         String javaVersion = System.getProperty("java.version");
         if(!javaVersion.startsWith("11")) {
             System.err.println("[FATAL ERROR]: java-11 is required (provided: " + javaVersion + ")");
             System.exit(0);
         }
+        */
     }
 
     @SuppressWarnings("unchecked")
