@@ -25,9 +25,7 @@ save_dir
 
 cd "$root_dir"
 
-git clone git@gitlab.com:mathieu-bergeron/ca.ntro.cards.solutions solutions
-git clone git@gitlab.com:mathieu-bergeron/ca.ntro.cards.enonces enonces
-git clone git@gitlab.com:mathieu-bergeron/ca.ntro.cards.examens examens
+git clone git@github.com:cartesjava/ca.ntro.cards.solutions solutions
 
 restore_dir
 
