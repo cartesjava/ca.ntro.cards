@@ -1,0 +1,49 @@
+plugins {
+    id 'localJavaPlugin'
+    id 'localFxPlugin'
+}
+
+dependencies {
+    ntroDependancies.split(',').each {
+        implementation project(":ntro_${it}")
+    }
+
+    implementation project(':common')
+    implementation project(':common_procedure')
+
+    implementation project(':freesort_procedure')
+}
+
+sourceSets{
+    main {
+        resources {
+
+            if(project.gradle.startParameter.taskNames.find{it.contains("${project.name}:procedure")} != null){
+
+                srcDirs = [project(':freesort_procedure').sourceSets.main.resources]
+
+
+            }
+        }
+    }
+}
+
+def commonConfig = {
+    classpath = sourceSets.main.runtimeClasspath
+    jvmArgs('-Dfile.encoding=UTF-8')
+}
+
+def clientConfig = {
+    configure commonConfig
+    standardInput = System.in
+    jvmArgs('-Dsun.java2d.opengl=true')
+}
+
+def procedureConfig = {
+    configure clientConfig
+    main = "ca.ntro.cards.freesort.solution.Procedure"
+}
+
+task(freesort, dependsOn: 'classes', type: JavaExec) {
+   configure procedureConfig
+}
