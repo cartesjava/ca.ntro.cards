@@ -10,25 +10,44 @@ include 'common'
 include 'common_procedure'
 
 include 'foo_procedure'
+
+include 'foo_demo'
+project(':foo_demo').projectDir = file('demos/foo_demo')
+
 include 'foo_solution'
 project(':foo_solution').projectDir = file('solutions/foo_solution')
 
 include 'freesort_procedure'
+
+include 'freesort_demo'
+project(':freesort_demo').projectDir = file('demos/freesort_demo')
+
 include 'freesort_solution'
 project(':freesort_solution').projectDir = file('solutions/freesort_solution')
 
 include 'naivesort_procedure'
+
+include 'naivesort_demo'
+project(':naivesort_demo').projectDir = file('demos/naivesort_demo')
+
 include 'naivesort_solution'
 project(':naivesort_solution').projectDir = file('solutions/naivesort_solution')
 
 include 'shift_procedure'
+
+include 'shift_demo'
+project(':shift_demo').projectDir = file('demos/shift_demo')
+
 include 'shift_solution'
 project(':shift_solution').projectDir = file('solutions/shift_solution')
 
 include 'fibonacci_procedure'
+
+include 'fibonacci_demo'
+project(':fibonacci_demo').projectDir = file('demos/fibonacci_demo')
+
 include 'fibonacci_solution'
 project(':fibonacci_solution').projectDir = file('solutions/fibonacci_solution')
-
 
 buildscript {
     repositories {
