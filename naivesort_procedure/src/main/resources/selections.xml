@@ -60,6 +60,7 @@
 
         </HBox>
 
+        <!--
         <Pane  styleClass="hspace-tiny" />
 
         <HBox HBox.hgrow="ALWAYS"  
@@ -72,6 +73,7 @@
             </Label>
 
         </HBox>
+        -->
 
         <Pane  styleClass="hspace-tiny" />
 

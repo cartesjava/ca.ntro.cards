@@ -39,8 +39,8 @@ public class ShiftSelectionsView extends ProcedureSelectionsView<ShiftTestCaseFr
 	@FXML 
 	private Pane sizeContainer;
 
-	//@FXML 
-	//private Pane manualContainer;
+	@FXML 
+	private Pane manualContainer;
 
 	@FXML 
 	private Pane codeContainer;
@@ -80,8 +80,7 @@ public class ShiftSelectionsView extends ProcedureSelectionsView<ShiftTestCaseFr
 
 	@Override
 	protected Pane manualContainer() {
-		//return manualContainer;
-		return null;
+		return manualContainer;
 	}
 
 	@Override

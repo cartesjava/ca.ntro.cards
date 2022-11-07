@@ -43,15 +43,11 @@
              </Label>
          </HBox>
 
-         <!--
-
         <HBox fx:id="manualContainer" styleClass="left">
             <Button 
                 fx:id="manualButton">
              </Button>
         </HBox>
-
-         -->
 
         <HBox fx:id="codeContainer" styleClass="left">
             <Button 

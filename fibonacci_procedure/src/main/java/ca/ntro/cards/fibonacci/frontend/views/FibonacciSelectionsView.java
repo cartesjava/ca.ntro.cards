@@ -55,7 +55,7 @@ public class FibonacciSelectionsView extends ProcedureSelectionsView<FibonacciTe
 
 		Ntro.assertNotNull("idContainer", idContainer);
 		Ntro.assertNotNull("sizeContainer", sizeContainer);
-		Ntro.assertNotNull("manualContainer", manualContainer);
+		//Ntro.assertNotNull("manualContainer", manualContainer);
 		Ntro.assertNotNull("codeContainer", codeContainer);
 		Ntro.assertNotNull("solutionContainer", solutionContainer);
 		Ntro.assertNotNull("testCaseContainer", testCaseContainer);

@@ -84,6 +84,9 @@ public abstract class ProcedureSelectionsView<TEST_CASE_FRAGMENT extends Procedu
 			testCaseFragment.manualContainer().translateXProperty().bind(manualContainer().layoutXProperty());
 			testCaseFragment.manualContainer().minWidthProperty().bind(manualContainer().widthProperty());
 			testCaseFragment.manualContainer().maxWidthProperty().bind(manualContainer().widthProperty());
+
+		}else {
+			testCaseFragment.manualContainer().setVisible(false);
 		}
 
 		if(codeContainer() != null) {

@@ -37,8 +37,8 @@ public class ShiftTestCaseFragment extends ProcedureTestCaseFragment {
 	@FXML
 	protected Label inputSizeLabel;
 
-	//@FXML
-	//protected Button manualButton;
+	@FXML
+	protected Button manualButton;
 
 	@FXML
 	protected Button codeButton;
@@ -52,8 +52,8 @@ public class ShiftTestCaseFragment extends ProcedureTestCaseFragment {
 	@FXML 
 	private Pane sizeContainer;
 
-	//@FXML 
-	//private Pane manualContainer;
+	@FXML 
+	private Pane manualContainer;
 
 	@FXML 
 	private Pane codeContainer;
@@ -67,13 +67,13 @@ public class ShiftTestCaseFragment extends ProcedureTestCaseFragment {
 
 		Ntro.assertNotNull("testCaseIdLabel", testCaseIdLabel);
 		Ntro.assertNotNull("inputSizeLabel", inputSizeLabel);
-		//Ntro.assertNotNull("manualButton", manualButton);
+		Ntro.assertNotNull("manualButton", manualButton);
 		Ntro.assertNotNull("codeButton", codeButton);
 		Ntro.assertNotNull("solutionButton", solutionButton);
 
 		Ntro.assertNotNull("idContainer", idContainer);
 		Ntro.assertNotNull("sizeContainer", sizeContainer);
-		//Ntro.assertNotNull("manualContainer", manualContainer);
+		Ntro.assertNotNull("manualContainer", manualContainer);
 		Ntro.assertNotNull("codeContainer", codeContainer);
 		Ntro.assertNotNull("solutionContainer", solutionContainer);
 		
@@ -93,8 +93,7 @@ public class ShiftTestCaseFragment extends ProcedureTestCaseFragment {
 
 	@Override
 	protected Button manualButton() {
-		//return manualButton;
-		return null;
+		return manualButton;
 	}
 
 	@Override
@@ -119,8 +118,7 @@ public class ShiftTestCaseFragment extends ProcedureTestCaseFragment {
 
 	@Override
 	public Pane manualContainer() {
-		//return manualContainer;
-		return null;
+		return manualContainer;
 	}
 
 	@Override
