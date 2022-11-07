@@ -4,7 +4,7 @@ plugins {
 }
 
 project.group = 'ca.ntro.cards'
-project.version = 'atelier3_1'
+project.version = 'atelier4'
 
 
 dependencies {

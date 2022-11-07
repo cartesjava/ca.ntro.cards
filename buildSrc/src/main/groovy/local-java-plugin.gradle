@@ -55,3 +55,6 @@ jar{
     from sourceSets.main.allSource
 
 }
+
+tasks.eclipse.dependsOn(build)
+
