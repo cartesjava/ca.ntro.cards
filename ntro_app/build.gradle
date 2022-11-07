@@ -3,7 +3,7 @@ plugins {
 }
 
 project.group = 'ca.ntro.cards'
-project.version = 'atelier4'
+project.version = 'codelescartes'
 
 tasks.test{
     afterTest { desc, result -> 
