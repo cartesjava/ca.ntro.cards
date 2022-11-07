@@ -41,7 +41,7 @@ def clientConfig = {
 
 def procedureConfig = {
     configure clientConfig
-    main = "ca.ntro.cards.foo.solution.Procedure"
+    mainClass = "ca.ntro.cards.foo.solution.Procedure"
 }
 
 task(foo, dependsOn: 'classes', type: JavaExec) {

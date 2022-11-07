@@ -41,7 +41,7 @@ def clientConfig = {
 
 def procedureConfig = {
     configure clientConfig
-    main = "ca.ntro.cards.shift.solution.Procedure"
+    mainClass = "ca.ntro.cards.shift.solution.Procedure"
 }
 
 task(shift, dependsOn: 'classes', type: JavaExec) {

@@ -41,7 +41,7 @@ def clientConfig = {
 
 def procedureConfig = {
     configure clientConfig
-    main = "ca.ntro.cards.freesort.solution.Procedure"
+    mainClass = "ca.ntro.cards.freesort.solution.Procedure"
 }
 
 task(freesort, dependsOn: 'classes', type: JavaExec) {

@@ -41,7 +41,7 @@ def clientConfig = {
 
 def procedureConfig = {
     configure clientConfig
-    main = "ca.ntro.cards.fibonacci.solution.Procedure"
+    mainClass = "ca.ntro.cards.fibonacci.solution.Procedure"
 }
 
 task(fibonacci, dependsOn: 'classes', type: JavaExec) {
