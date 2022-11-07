@@ -58,19 +58,6 @@ public class   Calculateur
 	protected int n;
 	protected Fibonacci tete;
 
-	// XXX: uniquement pour examen2
-	/*
-	private long somme = 0;
-	
-	public long getSomme() {
-		return somme;
-	}
-
-	public void setSomme(long somme) {
-		this.somme = somme;
-	}
-	*/
-
 	public boolean getSiRecursif() {
 		return siRecursif;
 	}
