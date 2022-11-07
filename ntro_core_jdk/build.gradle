@@ -1,6 +1,5 @@
 plugins {
     id 'localJavaPlugin'
-    id 'maven'
 }
 
 project.group = 'ca.ntro.cards'
@@ -28,11 +27,6 @@ dependencies {
 }
 
 configurations{
-}
-
-
-tasks.build {
-    finalizedBy 'install'
 }
 
 tasks.test{

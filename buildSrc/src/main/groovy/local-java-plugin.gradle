@@ -19,6 +19,14 @@ dependencies {
     implementation 'org.slf4j:slf4j-nop:1.7.30'
 }
 
+/*
+tasks.copy {
+
+    duplicateStrategy = 'exclude'
+
+}
+*/
+
 tasks.clean {
     doFirst {
         new File("${project.projectDir}/build").deleteDir()
@@ -53,6 +61,8 @@ eclipseJdt.doLast{
 jar{
 
     from sourceSets.main.allSource
+
+    duplicatesStrategy = 'exclude'
 
 }
 
