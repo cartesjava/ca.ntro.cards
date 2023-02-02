@@ -54,7 +54,7 @@ eclipse {
 }
 
 
-task(fibonacci, dependsOn: 'classes', type: JavaExec) {
+task(valider, dependsOn: 'classes', type: JavaExec) {
    mainClass = "fibonacci.Procedure"
    classpath = sourceSets.main.runtimeClasspath
    standardInput = System.in

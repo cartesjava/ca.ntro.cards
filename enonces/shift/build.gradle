@@ -53,7 +53,7 @@ eclipse {
     }
 }
 
-task(shift, dependsOn: 'classes', type: JavaExec) {
+task(valider, dependsOn: 'classes', type: JavaExec) {
    mainClass = "shift.Procedure"
    classpath = sourceSets.main.runtimeClasspath
    standardInput = System.in
