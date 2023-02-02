@@ -1,0 +1,70 @@
+/*
+Copyright (C) (2022) (Mathieu Bergeron) (mathieu.bergeron@cmontmorency.qc.ca)
+
+This file is part of "Cartes Java", teaching tools made for https://cartesjava.github.io/
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+rootProject.name = 'ca.ntro.cards'
+
+include 'ntro_core'
+include 'ntro_core_jdk'
+include 'ntro_app'
+include 'ntro_app_jdk'
+include 'ntro_app_fx'
+
+include 'common'
+include 'common_procedure'
+include 'common_efficiency'
+
+include 'foo_procedure'
+include 'foo_efficiency'
+include 'foo_solution'
+project(':foo_solution').projectDir = file('solutions/foo_solution')
+
+include 'shift_procedure'
+include 'shift_efficiency'
+include 'shift_solution'
+project(':shift_solution').projectDir = file('solutions/shift_solution')
+
+include 'fibonacci_procedure'
+include 'fibonacci_efficiency'
+include 'fibonacci_solution'
+project(':fibonacci_solution').projectDir = file('solutions/fibonacci_solution')
+
+include 'mon_test_procedure'
+include 'mon_test_efficiency'
+include 'mon_test_solution'
+project(':mon_test_solution').projectDir = file('solutions/mon_test_solution')
+
+include 'validator_common'
+include 'validator_foo'
+include 'validator_foo_solution'
+project(':validator_foo_solution').projectDir = file('solutions/validator_foo_solution')
+
+include 'validator_cartesjava'
+include 'validator_cartesjava_solution'
+project(':validator_cartesjava_solution').projectDir = file('solutions/validator_cartesjava_solution')
+
+buildscript {
+    repositories {
+	    mavenCentral()
+	    maven {url "https://plugins.gradle.org/m2/"}
+    }
+
+    dependencies {
+        classpath 'org.openjfx:javafx-plugin:0.0.13'
+    }
+}

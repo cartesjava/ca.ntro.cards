@@ -1,0 +1,47 @@
+/*
+Copyright (C) (2020) (Mathieu Bergeron) (mathieu.bergeron@cmontmorency.qc.ca)
+
+This file is part of Ntro, an application framework designed with teaching in mind.
+
+This is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+*/
+package ca.ntro.app.services;
+
+import ca.ntro.app.Locale;
+import ca.ntro.app.LocaleJdk;
+
+public class LocaleServiceJdk implements LocaleService {
+
+	@Override
+	public Locale newLocale(String language) {
+		return new LocaleJdk(language);
+	}
+
+	@Override
+	public Locale newLocale(String language, String country) {
+		return new LocaleJdk(language, country);
+	}
+
+	@Override
+	public Locale newLocale(String language, String country, String variant) {
+		return new LocaleJdk(language, country, variant);
+	}
+
+	@Override
+	public Locale currentLocale() {
+		return new LocaleJdk();
+	}
+
+}

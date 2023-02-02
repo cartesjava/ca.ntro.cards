@@ -1,0 +1,5 @@
+Copyright (C) (2022) (Mathieu Bergeron) (mathieu.bergeron@cmontmorency.qc.ca)
+This program comes with ABSOLUTELY NO WARRANTY; 
+This is free software, and you are welcome to redistribute it
+under certain conditions;
+For details, see https://github.com/cartesjava/ca.ntro.cards/license.md

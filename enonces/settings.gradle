@@ -1,0 +1,38 @@
+rootProject.name = 'ca.ntro.cartes_java.enonces'
+
+include 'deplacer_decaler'
+include 'fibonacci'
+
+buildscript {
+
+    repositories {
+	    mavenCentral()
+	    maven {url "https://plugins.gradle.org/m2/"}
+    }
+
+    dependencies {
+        classpath 'org.openjfx:javafx-plugin:0.0.10'
+    }
+}
+
+sourceControl {
+
+    gitRepository("https://gitlab.com/mathieu-bergeron/ca.ntro.cards.git") {
+        ntroDependencies.split(',').each {
+            producesModule("ca.ntro.cards:ntro_${it}")
+        }
+
+        cardsDependencies.split(',').each {
+            producesModule("ca.ntro.cards:${it}")
+        }
+
+        atelier1_3Dependencies.split(',').each {
+            producesModule("ca.ntro.cards:${it}")
+        }
+
+        atelier2_3Dependencies.split(',').each {
+            producesModule("ca.ntro.cards:${it}")
+        }
+    }
+
+}

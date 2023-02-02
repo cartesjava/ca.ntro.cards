@@ -1,0 +1,36 @@
+/*
+Copyright (C) (2022) (Mathieu Bergeron) (mathieu.bergeron@cmontmorency.qc.ca)
+
+This file is part of "Cartes Java", teaching tools made for https://cartesjava.github.io/
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+*/
+package ca.ntro.cards.models;
+
+import ca.ntro.cards.common.models.CommonSettingsModel;
+import ca.ntro.cards.frontend.views.ProcedureSettingsView;
+import ca.ntro.cards.models.world2d.ProcedureDrawingOptions;
+
+public abstract class ProcedureSettingsModel<SETTINGS_VIEW extends ProcedureSettingsView, 
+                                             OPTIONS extends ProcedureDrawingOptions> 
+
+
+       extends CommonSettingsModel<SETTINGS_VIEW, OPTIONS> {
+
+	public void displayOn(ProcedureSettingsView settingsView) {
+		settingsView.displayUseFourCardColors(getUseFourCardColors());
+	}
+
+}

@@ -1,0 +1,43 @@
+plugins {
+    id 'localJavaPlugin'
+    id 'localFxPlugin'
+}
+
+dependencies {
+    ntroDependancies.split(',').each {
+        implementation project(":ntro_${it}")
+    }
+
+    implementation project(':validator_common')
+    implementation project(':validator_cartesjava')
+}
+
+def commonConfig = {
+    classpath = sourceSets.main.runtimeClasspath
+    jvmArgs('-Dfile.encoding=UTF-8')
+}
+
+def clientConfig = {
+    configure commonConfig
+    standardInput = System.in
+    jvmArgs('-Dsun.java2d.opengl=true')
+}
+
+def validateConfig = {
+    configure clientConfig
+    mainClass = "ca.ntro.cards.cartesjava.Valider"
+}
+
+def generateConfig = {
+    configure clientConfig
+    mainClass = "ca.ntro.cards.cartesjava.Generer"
+}
+
+task(valider, dependsOn: 'classes', type: JavaExec) {
+   configure validateConfig
+}
+
+task(generer, dependsOn: 'classes', type: JavaExec) {
+   configure generateConfig
+}
+

@@ -1,0 +1,281 @@
+/*
+Copyright (C) (2020) (Mathieu Bergeron) (mathieu.bergeron@cmontmorency.qc.ca)
+
+This file is part of Ntro, an application framework designed with teaching in mind.
+
+This is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+*/
+package ca.ntro.core.reflection.object_graph;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import ca.ntro.core.graph_writer.EdgeSpec;
+import ca.ntro.core.graph_writer.GraphWriter;
+import ca.ntro.core.graph_writer.GraphWriterException;
+import ca.ntro.core.graph_writer.RecordEdgeSpec;
+import ca.ntro.core.graph_writer.RecordEdgeSpecNtro;
+import ca.ntro.core.graph_writer.RecordItemSpecNtro;
+import ca.ntro.core.graph_writer.RecordNodeSpec;
+import ca.ntro.core.graph_writer.RecordNodeSpecNtro;
+import ca.ntro.core.graph_writer.RecordSpecNtro;
+import ca.ntro.core.graphs.generics.graph.GenericGraph;
+import ca.ntro.core.initialization.Ntro;
+
+public class ObjectStructureWriter {
+
+	private GenericGraph<ObjectNode,ReferenceEdge,ObjectGraphSearchOptions,ObjectGraphWriterOptions> graph;
+	private ObjectGraphWriterOptions options;
+	private InternalObjectGraphWriterNtro internalWriter;
+	private GraphWriter writer;
+	private List<RecordEdgeSpec> recordEdges = new ArrayList<>();
+	private Map<String, RecordNodeSpecNtro> nodeSpecByNodeId = new HashMap<>();
+	private Map<String, RecordSpecNtro> recordByNodeId = new HashMap<>();
+
+	public GenericGraph<ObjectNode, ReferenceEdge, ObjectGraphSearchOptions, ObjectGraphWriterOptions> getGraph() {
+		return graph;
+	}
+
+	public void setGraph(
+			GenericGraph<ObjectNode, ReferenceEdge, ObjectGraphSearchOptions, ObjectGraphWriterOptions> graph) {
+		this.graph = graph;
+	}
+
+	public ObjectGraphWriterOptions getOptions() {
+		return options;
+	}
+
+	public void setOptions(ObjectGraphWriterOptions options) {
+		this.options = options;
+	}
+
+	public InternalObjectGraphWriterNtro getInternalWriter() {
+		return internalWriter;
+	}
+
+	public void setInternalWriter(InternalObjectGraphWriterNtro internalWriter) {
+		this.internalWriter = internalWriter;
+	}
+
+	public GraphWriter getWriter() {
+		return writer;
+	}
+
+	public void setWriter(GraphWriter writer) {
+		this.writer = writer;
+	}
+
+	public List<RecordEdgeSpec> getRecordEdges() {
+		return recordEdges;
+	}
+
+	public void setRecordEdges(List<RecordEdgeSpec> recordEdges) {
+		this.recordEdges = recordEdges;
+	}
+
+	public Map<String, RecordNodeSpecNtro> getNodeSpecByNodeId() {
+		return nodeSpecByNodeId;
+	}
+
+	public void setNodeSpecByNodeId(Map<String, RecordNodeSpecNtro> nodeSpecByNodeId) {
+		this.nodeSpecByNodeId = nodeSpecByNodeId;
+	}
+
+	public Map<String, RecordSpecNtro> getRecordByNodeId() {
+		return recordByNodeId;
+	}
+
+	public void setRecordByNodeId(Map<String, RecordSpecNtro> recordByNodeId) {
+		this.recordByNodeId = recordByNodeId;
+	}
+	
+	
+
+	public ObjectStructureWriter(GenericGraph<ObjectNode, ReferenceEdge, ObjectGraphSearchOptions, ObjectGraphWriterOptions> graph, 
+			                     InternalObjectGraphWriterNtro internalWriter, 
+			                     ObjectGraphWriterOptions options, GraphWriter writer) {
+		setGraph(graph);
+		setInternalWriter(internalWriter);
+		setOptions(options);
+		setWriter(writer);
+	}
+
+	public void writeNodes() {
+
+		processNodesAndCreateRecordNodeSpecs();
+
+		writeRecordNodeSpecsForUserDefinedObjects();
+	}
+
+	private void processNodesAndCreateRecordNodeSpecs() {
+		getGraph().visitNodes().forEach(visitedNode -> {
+			
+			ObjectNode node = visitedNode.node();
+
+			processNode(node);
+
+			node.edges().forEach(edge -> {
+				
+				processEdge(edge);
+			});
+		});
+	}
+	
+	private boolean shouldDisplayAsUserDefinedObject(ObjectNode node, ObjectGraphWriterOptions options) {
+		boolean displayAsUserDefinedObject = false;
+		
+		if(node.isUserDefinedObject()) {
+
+			displayAsUserDefinedObject = true;
+
+		} else if(node.isList() 
+				&& !options.listAsSimpleValue()
+				&& !Ntro.reflection().isArray(node.object())) {
+
+			displayAsUserDefinedObject = true;
+
+		} else if(node.isMap() && !options.mapAsSimpleValue()) {
+
+			displayAsUserDefinedObject = true;
+		}
+		
+		return displayAsUserDefinedObject;
+	}
+
+	private void processNode(ObjectNode node) {
+		if(shouldDisplayAsUserDefinedObject(node, options)
+				&& !nodeSpecByNodeId.containsKey(node.id().toKey().toString())) {
+			
+			RecordNodeSpecNtro nodeSpec = getInternalWriter().recordNodeSpec(node, options);
+			RecordSpecNtro record = nodeSpec.getRecord();
+			
+			nodeSpecByNodeId.put(node.id().toKey().toString(), nodeSpec);
+			recordByNodeId.put(node.id().toKey().toString(), record);
+
+			RecordItemSpecNtro nodeLabelItem = record.addItem();
+			nodeLabelItem.setValue(node.label());
+			nodeLabelItem.setPortName(RecordNodeSpec.MAIN_PORT_NAME);
+		}
+	}
+
+	private void processEdge(ReferenceEdge edge) {
+		RecordNodeSpecNtro fromSpec = nodeSpecByNodeId.get(edge.from().id().toKey().toString());
+		RecordSpecNtro fromRecord = recordByNodeId.get(edge.from().id().toKey().toString());
+
+		String attributeName = edge.name().toString();
+
+		RecordSpecNtro subRecord = fromRecord.addSubRecord();
+		subRecord.setPortName(attributeName);
+
+		RecordItemSpecNtro nameItem = subRecord.addItem();
+		nameItem.setValue(attributeName);
+
+		if(edge.to().isSimpleValue()) {
+
+			RecordItemSpecNtro valueItem = subRecord.addItem();
+			valueItem.setValue(edge.to().asSimpleValue().toString());
+
+		}else if(shouldDisplayAsUserDefinedObject(edge.to(), options)) {
+			
+			processEdgeToUserDefinedObject(edge, fromSpec, attributeName, subRecord);
+
+		}else if(edge.to().isList()
+				|| edge.to().isMap()) {
+
+			processEdgeToMapOrList(edge, fromSpec, subRecord);
+		}
+	}
+
+	private void processEdgeToMapOrList(ReferenceEdge edge, 
+			                            RecordNodeSpecNtro fromSpec, 
+			                            RecordSpecNtro subRecord) {
+
+		if(edge.to().edges().isEmpty()) {
+
+			RecordItemSpecNtro valueItem = subRecord.addItem();
+			if(edge.to().isList()) {
+
+				valueItem.setValue("[]");
+
+			}else if(edge.to().isMap()){
+
+				valueItem.setValue("{}");
+			}
+			
+		}else {
+
+			RecordSpecNtro valuesRecord = subRecord.addSubRecord();
+			valuesRecord.setPortName("_V");
+
+			recordByNodeId.put(edge.to().id().toKey().toString(), valuesRecord);
+			nodeSpecByNodeId.put(edge.to().id().toKey().toString(), fromSpec);    // propagate that we are in the same node
+		}
+	}
+
+	private void processEdgeToUserDefinedObject(ReferenceEdge edge, 
+			                                    RecordNodeSpecNtro fromSpec, 
+			                                    String attributeName, 
+			                                    RecordSpecNtro subRecord) {
+
+		RecordItemSpecNtro referenceItem = subRecord.addItem();
+		referenceItem.setPortName(attributeName);
+
+		processNode(edge.to());
+
+		RecordNodeSpecNtro toSpec = nodeSpecByNodeId.get(edge.to().id().toKey().toString());
+
+		getRecordEdges().add(new RecordEdgeSpecNtro(fromSpec, 
+										            referenceItem.port(),
+										            edge,
+										            toSpec,
+										            RecordNodeSpec.MAIN_PORT_NAME));
+	}
+
+	private void writeRecordNodeSpecsForUserDefinedObjects() {
+		getGraph().nodes().findAll(n -> shouldDisplayAsUserDefinedObject(n, options)).forEach(node -> {
+			writeNode(node);
+		});
+	}
+
+
+	private void writeNode(ObjectNode node) {
+
+		RecordNodeSpecNtro nodeSpec = nodeSpecByNodeId.get(node.id().toKey().toString());
+		
+		try {
+
+			writer.addNode(nodeSpec);
+
+		} catch (GraphWriterException e) {
+			
+			Ntro.exceptionService().throwException(e);
+		}
+	}
+
+	public void writeEdges() {
+		for(EdgeSpec edge : recordEdges) {
+			try {
+
+				writer.addEdge(edge);
+
+			} catch (GraphWriterException e) {
+				
+				Ntro.exceptionService().throwException(e);
+			}
+		}
+	}
+}

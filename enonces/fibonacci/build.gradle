@@ -1,0 +1,62 @@
+plugins {
+    id 'localJavaPlugin'
+    id 'localFxPlugin'
+}
+
+
+dependencies {
+    ntroDependencies.split(',').each {
+        implementation "ca.ntro.cards:ntro_${it}:${version}"
+    }
+
+    cardsDependencies.split(',').each {
+        implementation "ca.ntro.cards:${it}:${version}"
+    }
+
+    atelier2_3Dependencies.split(',').each {
+        implementation "ca.ntro.cards:${it}:${version}"
+    }
+}
+
+eclipse {
+    classpath {
+        file {
+            whenMerged {
+                classpath ->
+
+                    def toRemove = []
+                    def toAdd = []
+
+                    entries.each {
+
+                        if(ntroDependencies.split(',').any{dependency -> it.path.equals("/ntro_"+dependency)}){
+                            toRemove += it
+                            toAdd += new org.gradle.plugins.ide.eclipse.model.Library(fileReference(file(it.publication.path)))
+                        }
+
+                        if(cardsDependencies.split(',').any{dependency -> it.path.equals("/"+dependency)}){
+                            toRemove += it
+                            toAdd += new org.gradle.plugins.ide.eclipse.model.Library(fileReference(file(it.publication.path)))
+                        }
+
+                        if(atelier2_3Dependencies.split(',').any{dependency -> it.path.equals("/"+dependency)}){
+                            toRemove += it
+                            toAdd += new org.gradle.plugins.ide.eclipse.model.Library(fileReference(file(it.publication.path)))
+                        }
+
+                    }
+
+                    entries.removeAll toRemove
+                    entries.addAll toAdd
+            }
+        }
+    }
+}
+
+
+task(atelier2_3, dependsOn: 'classes', type: JavaExec) {
+   mainClass = "atelier2_3.MonAtelier2_3"
+   classpath = sourceSets.main.runtimeClasspath
+   standardInput = System.in
+   jvmArgs('-Dfile.encoding=UTF-8')
+}

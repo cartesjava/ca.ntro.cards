@@ -1,0 +1,97 @@
+plugins {
+    id 'localJavaPlugin'
+    id 'localFxPlugin'
+}
+
+dependencies {
+    ntroDependancies.split(',').each {
+        implementation project(":ntro_${it}")
+    }
+
+    implementation project(':common')
+    implementation project(':common_procedure')
+    implementation project(':common_efficiency')
+
+    implementation project(':shift_procedure')
+    implementation project(':shift_efficiency')
+}
+
+sourceSets{
+    main {
+        resources {
+
+            if(project.gradle.startParameter.taskNames.find{it.contains("${project.name}:procedure")} != null){
+
+                srcDirs = [project(':shift_procedure').sourceSets.main.resources]
+
+
+            }else if(project.gradle.startParameter.taskNames.find{it.contains("${project.name}:efficacite")} != null){
+
+                srcDirs = [project(':shift_efficiency').sourceSets.main.resources]
+
+            }
+        }
+    }
+}
+
+def commonConfig = {
+    classpath = sourceSets.main.runtimeClasspath
+    jvmArgs('-Dfile.encoding=UTF-8')
+}
+
+def clientConfig = {
+    configure commonConfig
+    standardInput = System.in
+    jvmArgs('-Dsun.java2d.opengl=true')
+}
+
+def procedureConfig = {
+    configure clientConfig
+    mainClass = "ca.ntro.cards.shift.solution.Procedure"
+}
+
+def efficiencyConfig = {
+    configure clientConfig
+    mainClass = "ca.ntro.cards.shift.solution.Efficacite"
+}
+
+def generateConfig = {
+    configure commonConfig
+    mainClass = "ca.ntro.cards.shift.solution.Generer"
+}
+
+task(procedure, dependsOn: 'classes', type: JavaExec) {
+   configure procedureConfig
+   if (project.hasProperty("ex")){
+        args(project.getProperty("ex"))
+   }
+}
+
+task(ex01, dependsOn: 'classes', type: JavaExec) {
+   configure procedureConfig
+   args('ex01')
+}
+
+task(ex02, dependsOn: 'classes', type: JavaExec) {
+   configure procedureConfig
+   args('ex02')
+}
+
+task(random10, dependsOn: 'classes', type: JavaExec) {
+   configure procedureConfig
+   args('random10')
+}
+
+task(random20, dependsOn: 'classes', type: JavaExec) {
+   configure procedureConfig
+   args('random20')
+}
+
+task(efficacite, dependsOn: 'classes', type: JavaExec) {
+   configure efficiencyConfig
+}
+
+task(generer, dependsOn: 'classes', type: JavaExec) {
+   configure generateConfig
+}
+
