@@ -3,7 +3,7 @@ plugins {
 }
 
 project.group = 'ca.ntro.cards'
-project.version = 'demo'
+project.version = 'ateliers'
 
 dependencies {
     implementation project(':ntro_core')

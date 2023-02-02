@@ -13,7 +13,7 @@ dependencies {
         implementation "ca.ntro.cards:${it}:${version}"
     }
 
-    atelier1_3Dependencies.split(',').each {
+    shiftDependencies.split(',').each {
         implementation "ca.ntro.cards:${it}:${version}"
     }
 }
@@ -39,7 +39,7 @@ eclipse {
                             toAdd += new org.gradle.plugins.ide.eclipse.model.Library(fileReference(file(it.publication.path)))
                         }
 
-                        if(atelier1_3Dependencies.split(',').any{dependency -> it.path.equals("/"+dependency)}){
+                        if(shiftDependencies.split(',').any{dependency -> it.path.equals("/"+dependency)}){
                             toRemove += it
                             toAdd += new org.gradle.plugins.ide.eclipse.model.Library(fileReference(file(it.publication.path)))
                         }
@@ -53,9 +53,8 @@ eclipse {
     }
 }
 
-
-task(atelier1_3, dependsOn: 'classes', type: JavaExec) {
-   mainClass = "atelier1_3.Procedure"
+task(shift, dependsOn: 'classes', type: JavaExec) {
+   mainClass = "shift.Procedure"
    classpath = sourceSets.main.runtimeClasspath
    standardInput = System.in
    jvmArgs('-Dfile.encoding=UTF-8')

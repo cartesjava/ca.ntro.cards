@@ -21,11 +21,11 @@ scripts_dir=$(dirname "$this_dir")
 . "$scripts_dir/include.sh"
 ###################
 
-fichier="deplacer_decaler"
+fichier="shift"
 
 sh "$scripts_dir"/clean_root.sh
 
-ateliers="deplacer_decaler"
+ateliers="shift"
 
 rm -v "$atelier".zip
 

@@ -13,7 +13,7 @@ dependencies {
         implementation "ca.ntro.cards:${it}:${version}"
     }
 
-    atelier2_3Dependencies.split(',').each {
+    fibonacciDependencies.split(',').each {
         implementation "ca.ntro.cards:${it}:${version}"
     }
 }
@@ -39,7 +39,7 @@ eclipse {
                             toAdd += new org.gradle.plugins.ide.eclipse.model.Library(fileReference(file(it.publication.path)))
                         }
 
-                        if(atelier2_3Dependencies.split(',').any{dependency -> it.path.equals("/"+dependency)}){
+                        if(fibonacciDependencies.split(',').any{dependency -> it.path.equals("/"+dependency)}){
                             toRemove += it
                             toAdd += new org.gradle.plugins.ide.eclipse.model.Library(fileReference(file(it.publication.path)))
                         }
@@ -54,8 +54,8 @@ eclipse {
 }
 
 
-task(atelier2_3, dependsOn: 'classes', type: JavaExec) {
-   mainClass = "atelier2_3.MonAtelier2_3"
+task(fibonacci, dependsOn: 'classes', type: JavaExec) {
+   mainClass = "fibonacci.Procedure"
    classpath = sourceSets.main.runtimeClasspath
    standardInput = System.in
    jvmArgs('-Dfile.encoding=UTF-8')
